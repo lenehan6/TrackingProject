@@ -17,6 +17,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
         self.avgPositionDeviation = 0.002   #Average deviation from the position in file
         self.loopAtEndOfFile = True         #Start file again when the file finishes
         self.pathCoords = [];               #Fill when simulation starts
+        self.lastPosition = '';
 
     def setSource(self, source):
         self.source = str(source);
@@ -40,16 +41,20 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
     def run(self):
         print "Simulator Running";
-        coords = self.event.course.coords;
+        coords = list(self.event.course.coords);
 
         wp_last = coords.pop(0);
         wp_next = coords.pop(0);
+
+        e_lng = [0, 0, 0, 0, 0];
+        e_lat = [0, 0, 0, 0, 0];
+        e_alt = [0, 0, 0, 0, 0];
         i = 0;
 
         thisPos = Location();
         thisPos.setTime( time.time()*1000 );
         interval = DEFAULT_INTERVAL;
-        while not self.quit:
+        while not self._quit:
             lastPos = thisPos;
 
             dLong = wp_next.longitude - wp_last.longitude;
@@ -79,7 +84,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
                     if ( len(coords) == 0 ):
                         if self.loopAtEndOfFile:
                             #reload coords
-                            coords = self.event.course.coords;
+                            coords = list(self.event.course.coords);
                         else:
                             self.quit = True;
                             continue;
@@ -88,14 +93,12 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
                     wp_next = coords.pop(0);
                 #end if
 
+                #track error from current line
+
             #end if
-
-
-
-
             i += 1;
 
-            print thisPos;
+            self.lastPosition = thisPos;
             time.sleep( interval );
         #end while
 

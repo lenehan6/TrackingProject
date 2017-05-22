@@ -26,6 +26,17 @@ class Location:
     def __repr__(self):
         return self.__str__();
 
+    def dict(self):
+        _dict = dict();
+        _dict["lng"] = float( self.longitude );
+        _dict["lat"] = float( self.latitude );
+        _dict["alt"] = float( self.altitude );
+        _dict["vAbs"] = float( self.velocity );
+        _dict["vTheta"] = float( self.vTheta );
+        _dict["vPhi"] = float( self.vPhi );
+        _dict["time_d"] = int( self.time );
+        _dict["time_s"] = int( self.serverTime );
+        return _dict;
 
 
     def setPosition(self, long, lat, alt):

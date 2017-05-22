@@ -14,7 +14,11 @@ class IODevice_AbstractObject(Thread):
         self.updateInterval = -1;
         self.type = type;
         self.event = event;
-        self.quit = False;
+        self.name = ""
+        self._quit = False;
+
+    def quit(self):
+        self._quit = True;
 
     def setUpdateInterval(self, interval):
         self.updateInterval = int(interval);
@@ -23,3 +27,8 @@ class IODevice_AbstractObject(Thread):
         saveData["type"] = self.type;
         saveData["updateInterval"] = self.updateInterval;
         return saveData;
+
+    def setDeviceName(self, name):
+        self.name = name;
+
+

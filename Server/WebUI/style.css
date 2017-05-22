@@ -1,0 +1,91 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", sans-serif;
+    font-size: small;
+}
+
+#tabSideMenu {
+    position:           fixed;
+    clear:              both;
+    height:             100%;
+    width:              20%;
+    maxWidth:           100px;
+    top:                0;
+    border:             none;
+    padding-bottom:     42px;
+    background-color:   transparent;
+}
+
+#cellSideMenuTop, #cellSideMenuBottom {
+    color:              #523735;
+    padding:            6px;
+}
+
+#cellSideMenuTop {
+    vertical-align: top;
+}
+
+#cellSideMenuBottom {
+    vertical-align: bottom;
+}
+
+div.boxDiv {
+    background-color:   white;
+    border:             solid 1px #DDDDEE;
+    box-shadow:         4px 4px 2px #50545c;
+    margin:             12px;
+}
+
+div.boxDiv > div {
+    padding:            0;
+}
+
+div.boxDiv > :first-child {
+    background-color:   #F8F8F8;
+    padding:            4px;
+    border:             none;
+    border-bottom:      inherit;
+    font-weight:        bold;
+}
+
+table {
+    width:              100%;
+}
+
+table th {
+    background-color:   #EDEDED;
+    font-weight:        bold;
+    text-align:         left;
+    padding:            4px;
+}
+
+
+
+#footer {
+    position:           fixed;
+    clear:              both;
+    width:              100%;
+    height:             16px;
+    bottom:             0;
+    border:             none;
+    padding:            13px 0 0 0;
+    background-color:   #50545c;
+}
+
+table {
+    padding:            0;
+    border-spacing:     0;
+}
+
+div.boxDiv table td {
+    padding:            4px;
+    border-spacing:     2px;
+}

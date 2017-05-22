@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking Project</title>
+    <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjo0zCmULcysDoW6EH_NGxMZ2T2ktUU9E"></script>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="style.css"></link>
+
+</head>
+<body onload="initMap()">
+
+<div id="map"></div>
+
+<table id="tabSideMenu">
+    <tr><td id="cellSideMenuTop">
+            <div class="boxDiv" id="divViews">
+                <div>Views</div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr id="rowViewCourse">
+                            <td>Course</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="rowViewLeader">
+                            <td>Leader</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+    </td></tr>
+    <tr><td id="cellSideMenuBottom">
+            <div class="boxDiv" id="divViews">
+                <div>Views</div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr id="rowViewCourse">
+                            <td>Course</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr id="rowViewLeader">
+                            <td>Leader</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="boxDiv" id="divSettings">
+                <div>Settings</div>
+                <div>
+                    <table>
+                        <tr id="rowSetting_AutoChangeView">
+                            <td>Auto-change views</td>
+                            <td><input type="checkbox" id="chkAutoChangeView"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+    </td></tr>
+</table>
+
+<div id="footer"></div>
+
+</body>
+</html>
