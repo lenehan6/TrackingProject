@@ -3,6 +3,7 @@ import time
 
 class Location:
     def __init__(self):
+        self.addr = "";
         self.longitude = 0;
         self.latitude = 0;
         self.altitude = 0;
@@ -51,3 +52,6 @@ class Location:
 
     def setTime(self, t):
         self.time = int(t);
+
+    def setAddress(self, a):
+        self.addr = a;

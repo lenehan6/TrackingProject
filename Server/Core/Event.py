@@ -1,14 +1,13 @@
-from threading import Thread
+from PyQt4.QtCore import *
+from Course import *
 
-from Course import Course
-
-
-class Event(Thread):
-    def __init__(self, group=None, target=None, name=None, args=(), kwargs={}):
-        super(Event, self).__init__(group, target, name, args, kwargs);
+class Contest(QThread):
+    def __init__(self, parent=None):
+        QThread.__init__(self, parent);
         self.location = tuple();        # tuple with LANG/LONG
         self.courseFileLocation = '';   # save location of course KML
         self.course = '';               # KML object with course
+        self.leader = '';
 
 
     def setLocation(self, location):
@@ -21,4 +20,5 @@ class Event(Thread):
     def getSaveData(self):
         saveData["location"] = self.location;
         saveData["course"] = self.course;
+        saveData["leader"] = self.leader;
         return saveData;

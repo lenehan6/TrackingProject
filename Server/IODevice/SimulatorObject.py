@@ -1,3 +1,5 @@
+from PyQt4.QtCore import *
+
 from AbstractObject import IODevice_AbstractObject, Type
 from Server.Core.Location import Location
 import xml.etree as XML
@@ -10,8 +12,8 @@ EARTHS_RADIUS = 6378137;
 
 
 class IODevice_SimulatorObject( IODevice_AbstractObject ):
-    def __init__(self, event, group=None, target=None, name=None, args=(), kwargs={}):
-        super( IODevice_SimulatorObject, self ).__init__(event, Type.Simulator, group, target, name, args, kwargs);
+    def __init__(self, contest, parent=None):
+        super( IODevice_SimulatorObject, self ).__init__(contest, Type.Simulator, parent);
         self.avgSpeed = 40/3.6;              #Average speed of source
         self.avgLag = 200;                  #Average milliseconds different between fix time and recieve time
         self.avgPositionDeviation = 0.002   #Average deviation from the position in file
@@ -41,7 +43,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
     def run(self):
         print "Simulator Running";
-        coords = list(self.event.course.coords);
+        coords = list(self.contest.course.coords);
 
         wp_last = coords.pop(0);
         wp_next = coords.pop(0);
@@ -53,6 +55,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
         thisPos = Location();
         thisPos.setTime( time.time()*1000 );
+        thisPos.setAddress( self.addr );
         interval = DEFAULT_INTERVAL;
         while not self._quit:
             lastPos = thisPos;
@@ -66,6 +69,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
                 thisPos = wp_last;
             else:
                 thisPos = Location();
+                thisPos.setAddress(self.addr);
                 thisPos.setTime( time.time() * 1000 + self.avgLag);
                 theta = numpy.arctan2(dLong, dLat);
                 phi = numpy.arctan2( dAlt, ((dLong ** 2 + dLat ** 2) ** (0.5)) );
@@ -84,7 +88,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
                     if ( len(coords) == 0 ):
                         if self.loopAtEndOfFile:
                             #reload coords
-                            coords = list(self.event.course.coords);
+                            coords = list(self.contest.course.coords);
                         else:
                             self.quit = True;
                             continue;
@@ -99,6 +103,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
             i += 1;
 
             self.lastPosition = thisPos;
+            self.emit( SIGNAL("simulatorOutput(PyQt_PyObject)"), thisPos );
             time.sleep( interval );
         #end while
 

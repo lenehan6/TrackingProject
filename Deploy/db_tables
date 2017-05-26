@@ -1,0 +1,3 @@
+CREATE TABLE gpsSources (id SERIAL, mac TEXT, name TEXT, firstSeen TIMESTAMP, lastSeen TIMESTAMP, PRIMARY KEY (id) );
+
+CREATE TABLE stage1.gpsLocations(id SERIAL, mac TEXT, time BIGINT, serverTime BIGINT, latitude FLOAT, longitude FLOAT, altitude FLOAT, speed FLOAT, direction FLOAT, PRIMARY KEY (id));

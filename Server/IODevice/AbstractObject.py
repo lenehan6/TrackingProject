@@ -1,4 +1,4 @@
-from threading import Thread
+from PyQt4.QtCore import *
 
 from enum import *
 
@@ -8,14 +8,15 @@ class Type(Enum):
     Simulator = 1;
 
 
-class IODevice_AbstractObject(Thread):
-    def __init__(self, event, type=Type.Nil, group=None, target=None, name=None, args=(), kwargs={}):
-        super(IODevice_AbstractObject, self).__init__(group, target, name, args, kwargs);
+class IODevice_AbstractObject(QThread):
+    def __init__(self, contest, type=Type.Nil, parent=None):
+        QThread.__init__(self, parent);
         self.updateInterval = -1;
         self.type = type;
-        self.event = event;
+        self.contest = contest;
         self.name = ""
         self._quit = False;
+        self.addr = "SI:MU:LA:TO:R0:01";
 
     def quit(self):
         self._quit = True;
@@ -31,4 +32,5 @@ class IODevice_AbstractObject(Thread):
     def setDeviceName(self, name):
         self.name = name;
 
-
+    def __del__(self):
+        self.wait();

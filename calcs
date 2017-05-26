@@ -1,0 +1,13 @@
+Gap time, time difference of when participant was at location v leader at location
+
+
+determine leader
+
+for each participant
+    get current location with timestamp
+    get leader's timestamp when leader was at location
+    participant gap time is difference in time
+
+
+
+def ->

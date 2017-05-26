@@ -1,6 +1,13 @@
 var map;
 var markers = [];
 
+var timer_divRunningTime = setInterval(myTimer, 100);
+
+function myTimer() {
+    var d = new Date();
+    document.getElementById("divRunningTime").innerHTML = d.toLocaleTimeString();
+}
+
 
 function initMap() {
 
