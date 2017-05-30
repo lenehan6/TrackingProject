@@ -10,7 +10,7 @@ class ScoringEngine_GapTimeEngine( ScoringEngine_AbstractObject ):
         #manually update every 5 seconds
         self.setUpdateInterval( 5 );
         #for writing to db directly
-        self.db = QSqlDatabase.addDatabase("QSQLITE");
+        self.db = QSqlDatabase.addDatabase("QPSQL", str(time.time()));
         self.db.setDatabaseName("db");
         self.db.open();
 

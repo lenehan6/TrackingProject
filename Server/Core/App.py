@@ -1,10 +1,11 @@
 from PyQt4.QtCore import *
 from PyQt4.QtSql import *
+import time
 import Location
 
 class App( QObject ):
     def __init__(self, parent=None):
-        QThread.__init__(self, parent);
+        QObject.__init__(self, parent);
         self.contest = '';
         self.webServer = '';
         self.scoringEngine = '';
@@ -39,7 +40,7 @@ class App( QObject ):
         self.scoringEngine = engine;
 
     def writeLocationToDb( self, loc ):
-        print "Writing location", loc;
+        print loc.addr, " - Writing location", loc;
         query = "INSERT INTO stage1.gpsLocations (mac, time, serverTime, latitude, longitude, altitude, speed, direction) VALUES ( '" + loc.addr + "', " + str(loc.time) + ", " + str(loc.serverTime) + ", " + str(loc.latitude) + ", " + str(loc.longitude) + ", " + str(loc.altitude) + ", " + str(loc.velocity) + ", " + str(loc.vTheta) + ")";
         q = QSqlQuery(self.db);
         q.exec_(query);
@@ -48,5 +49,17 @@ class App( QObject ):
 
         self.emit( SIGNAL("dbLocationsUpdated()") );
         return;
+
+    def deleteEventData( self ):
+        print "Deleting event data";
+        query = "DELETE FROM stage1.gpsLocations";
+        q = QSqlQuery(self.db);
+        q.exec_(query);
+        if q.lastError().type() != QSqlError.NoError:
+            print "writeLocationToDb() $ query failed, ", q.lastError().text(), q.lastQuery();
+
+        self.emit( SIGNAL("dbLocationsUpdated()") );
+        return;
+
 
 

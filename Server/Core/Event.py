@@ -1,9 +1,9 @@
 from PyQt4.QtCore import *
 from Course import *
 
-class Contest(QThread):
+class Contest(QObject):
     def __init__(self, parent=None):
-        QThread.__init__(self, parent);
+        QObject.__init__(self, parent);
         self.location = tuple();        # tuple with LANG/LONG
         self.courseFileLocation = '';   # save location of course KML
         self.course = '';               # KML object with course

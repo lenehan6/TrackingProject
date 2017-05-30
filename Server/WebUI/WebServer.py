@@ -3,12 +3,14 @@ import SocketServer
 import threading
 import json
 
+from PyQt4.QtCore import *
 
-class WebServer(threading.Thread):
-    def __init__(self, app, group=None, target=None, name=None, args=(), kwargs={}):
-        super(WebServer, self).__init__(group, target, name, args, kwargs);
+
+class WebServer(QThread):
+    def __init__(self, app, parent=None):
+        QThread.__init__(self, parent);
         self.HOST = "localhost"
-        self.PORT = 8081
+        self.PORT = 8084
         self.Handler = '';
         self.httpd = '';
         self._quit = False;
@@ -43,6 +45,10 @@ class WebServer(threading.Thread):
 
 
 class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    def log_message(self, format, *args):
+        #print "%s - - [%s] %s\n" % (self.address_string(), self.log_date_time_string(), format % args);
+        return;
+
     def do_GET(self):
         if (str(self.path).startswith("/api/")):
             self.apiHandler(self.path);

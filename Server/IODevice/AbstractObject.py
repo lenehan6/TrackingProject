@@ -8,7 +8,7 @@ class Type(Enum):
     Simulator = 1;
 
 
-class IODevice_AbstractObject(QThread):
+class IODevice_AbstractObject(QObject):
     def __init__(self, contest, type=Type.Nil, parent=None):
         QThread.__init__(self, parent);
         self.updateInterval = -1;
@@ -16,7 +16,14 @@ class IODevice_AbstractObject(QThread):
         self.contest = contest;
         self.name = ""
         self._quit = False;
-        self.addr = "SI:MU:LA:TO:R0:01";
+        self.addr = "";
+        self.workerThread = QThread();
+        self.workerThread.start();
+        self.moveToThread( self.workerThread );
+
+    def __del__(self):
+        self.workerThread.quit();
+        self.workerThread.wait();
 
     def quit(self):
         self._quit = True;
@@ -31,6 +38,3 @@ class IODevice_AbstractObject(QThread):
 
     def setDeviceName(self, name):
         self.name = name;
-
-    def __del__(self):
-        self.wait();

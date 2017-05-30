@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1dc7860e-74d6-4bb2-aab3-e32d373dae64" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Deploy/db_tables" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Server/ScoringEngine/AbstractObject.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Server/ScoringEngine/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/calcs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Core/App.py" afterPath="$PROJECT_DIR$/Server/Core/App.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Core/Course.py" afterPath="$PROJECT_DIR$/Server/Core/Course.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Core/Event.py" afterPath="$PROJECT_DIR$/Server/Core/Event.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Core/Location.py" afterPath="$PROJECT_DIR$/Server/Core/Location.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/IODevice/AbstractObject.py" afterPath="$PROJECT_DIR$/Server/IODevice/AbstractObject.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/IODevice/SimulatorObject.py" afterPath="$PROJECT_DIR$/Server/IODevice/SimulatorObject.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/WebUI/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Server/WebUI/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py" afterPath="$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/WebUI/WebServer.py" afterPath="$PROJECT_DIR$/Server/WebUI/WebServer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/WebUI/index.html" afterPath="$PROJECT_DIR$/Server/WebUI/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/WebUI/index.js" afterPath="$PROJECT_DIR$/Server/WebUI/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/WebUI/style.css" afterPath="$PROJECT_DIR$/Server/WebUI/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/test_simulator.py" afterPath="$PROJECT_DIR$/Server/test_simulator.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +23,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TrackingProject$Runner.coverage" NAME="Runner Coverage Results" MODIFIED="1492165114278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
-    <SUITE FILE_PATH="coverage/TrackingProject$test_simulator.coverage" NAME="test_simulator Coverage Results" MODIFIED="1495776277043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
+    <SUITE FILE_PATH="coverage/TrackingProject$test_simulator.coverage" NAME="test_simulator Coverage Results" MODIFIED="1496146387097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -47,14 +41,14 @@
     <favorites_list name="TrackingProject" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.543609">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="AbstractObject.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/IODevice/AbstractObject.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+                <state relative-caret-position="345">
+                  <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -65,8 +59,8 @@
           <file leaf-file-name="SimulatorObject.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/IODevice/SimulatorObject.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="26" />
+                <state relative-caret-position="116">
+                  <caret line="143" column="35" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -74,14 +68,24 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WebServer.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="WebServer.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Server/WebUI/WebServer.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1050">
-                  <caret line="73" column="23" lean-forward="false" selection-start-line="73" selection-start-column="23" selection-end-line="73" selection-end-column="23" />
+                <state relative-caret-position="180">
+                  <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#23#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Server/WebUI/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1140">
+                  <caret line="329" column="55" lean-forward="false" selection-start-line="329" selection-start-column="55" selection-end-line="329" selection-end-column="55" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -101,23 +105,30 @@
           <file leaf-file-name="Course.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/Core/Course.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+                <state relative-caret-position="320">
+                  <caret line="103" column="8" lean-forward="true" selection-start-line="103" selection-start-column="8" selection-end-line="105" selection-end-column="86" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
+                    <marker date="1496145933000" expanded="true" signature="513:538" ph="DELETE FROM " />
+                    <marker date="1496145933000" expanded="true" signature="524:538" ph="INSERT INTO stage1.course... " />
+                    <marker date="1496145933000" expanded="true" signature="615:641" ph="DELETE FROM " />
+                    <marker date="1496145933000" expanded="true" signature="1497:1536" ph="INSERT INTO stage1.course... " />
+                    <marker date="1496145933000" expanded="true" signature="1497:1537" ph="INSERT INTO stage1.course... " />
+                    <marker date="1496145933000" expanded="true" signature="1497:1565" ph="INSERT INTO stage1.course... " />
+                    <marker date="1496145933000" expanded="true" signature="1589:1695" ph="INSERT INTO stage1.course2... " />
+                    <marker date="1496145933000" expanded="true" signature="1788:1855" ph="SELECT secto... course2or" />
+                    <marker date="1496145933000" expanded="true" signature="2903:3017" ph="SELECT ST_As... course2" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="test_simulator.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Server/test_simulator.py">
+          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Server/__init__.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -125,20 +136,22 @@
           <file leaf-file-name="App.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/Core/App.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="182">
-                  <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="38" />
+                <state relative-caret-position="185">
+                  <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
-                    <marker date="1495776088000" expanded="true" signature="91:1242" ph="..." />
-                    <marker date="1495776088000" expanded="true" signature="1299:1403" ph="INSERT INTO gpsSources... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1414" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1433" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1456" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1484" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1485" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1512" ph="INSERT INTO gpsLocations... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1613" ph="INSERT INTO gpsSources... " />
-                    <marker date="1495776088000" expanded="true" signature="1299:1618" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="103:1254" ph="..." />
+                    <marker date="1496146165000" expanded="true" signature="1324:1428" ph="INSERT INTO gpsSources... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1439" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1458" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1481" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1509" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1510" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1537" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1638" ph="INSERT INTO gpsSources... " />
+                    <marker date="1496146165000" expanded="true" signature="1324:1643" ph="INSERT INTO gpsLocations... " />
+                    <marker date="1496146165000" expanded="true" signature="2009:2040" ph="DELETE FROM " />
+                    <marker date="1496146165000" expanded="true" signature="2020:2040" ph="INSERT INTO stage1.gpsLocations... " />
                   </folding>
                 </state>
               </provider>
@@ -147,8 +160,8 @@
           <file leaf-file-name="AbstractObject.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/AbstractObject.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+                <state relative-caret-position="240">
+                  <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -156,28 +169,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="GapTimeEngine.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="GapTimeEngine.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="326">
-                  <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+                <state relative-caret-position="180">
+                  <caret line="12" column="61" lean-forward="false" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="61" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
-                    <marker date="1495778382000" expanded="true" signature="833:1005" ph="SELECT p.mac... MAX" />
-                    <marker date="1495778382000" expanded="true" signature="897:960" ph="SELECT MAX(i... gpsLocations" />
-                    <marker date="1495778382000" expanded="true" signature="1709:2012" ph="INSERT INTO gpsLocations... " />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Event.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Server/Core/Event.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
+                    <marker date="1496027604000" expanded="true" signature="849:1021" ph="SELECT p.mac... MAX" />
+                    <marker date="1496027604000" expanded="true" signature="913:976" ph="SELECT MAX(i... gpsLocations" />
+                    <marker date="1496027604000" expanded="true" signature="1725:2028" ph="INSERT INTO gpsLocations... " />
                   </folding>
                 </state>
               </provider>
@@ -187,11 +188,23 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="test_simulator.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="test_simulator.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Server/test_simulator.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+                <state relative-caret-position="120">
+                  <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Event.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Server/Core/Event.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="225">
+                  <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -217,14 +230,24 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Location.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Location.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Server/Core/Location.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-55">
-                  <caret line="20" column="42" lean-forward="false" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+                <state relative-caret-position="225">
+                  <caret line="19" column="69" lean-forward="false" selection-start-line="19" selection-start-column="69" selection-end-line="19" selection-end-column="69" />
                   <folding>
                     <element signature="e#0#15#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Server/WebUI/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="345">
+                  <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -247,6 +270,7 @@
       <find>gpsLocations</find>
       <find>event</find>
       <find>Event</find>
+      <find>simulatorOutput</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -263,20 +287,21 @@
         <option value="$PROJECT_DIR$/Server/vars.py" />
         <option value="$PROJECT_DIR$/Server/Core/__init__.py" />
         <option value="$PROJECT_DIR$/Server/WebServer.py" />
-        <option value="$PROJECT_DIR$/Server/Core/Course.py" />
         <option value="$PROJECT_DIR$/Testing/Untitled map.kml" />
-        <option value="$PROJECT_DIR$/Server/WebUI/WebServer.py" />
-        <option value="$PROJECT_DIR$/Server/WebUI/index.html" />
         <option value="$PROJECT_DIR$/Server/Core/Location.py" />
         <option value="$PROJECT_DIR$/calcs" />
         <option value="$PROJECT_DIR$/Deploy/db_tables" />
         <option value="$PROJECT_DIR$/Server/ScoringEngine/AbstractObject.py" />
-        <option value="$PROJECT_DIR$/Server/Core/App.py" />
         <option value="$PROJECT_DIR$/Server/IODevice/AbstractObject.py" />
-        <option value="$PROJECT_DIR$/Server/IODevice/SimulatorObject.py" />
         <option value="$PROJECT_DIR$/Server/test_simulator.py" />
-        <option value="$PROJECT_DIR$/Server/Core/Event.py" />
+        <option value="$PROJECT_DIR$/Server/WebUI/index.js" />
+        <option value="$PROJECT_DIR$/Server/WebUI/index.html" />
         <option value="$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py" />
+        <option value="$PROJECT_DIR$/Server/Core/Event.py" />
+        <option value="$PROJECT_DIR$/Server/Core/Course.py" />
+        <option value="$PROJECT_DIR$/Server/Core/App.py" />
+        <option value="$PROJECT_DIR$/Server/IODevice/SimulatorObject.py" />
+        <option value="$PROJECT_DIR$/Server/WebUI/WebServer.py" />
       </list>
     </option>
   </component>
@@ -306,8 +331,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -345,6 +368,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TrackingProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TrackingProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebUI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,6 +477,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -747,14 +790,14 @@
     <frame x="0" y="22" width="1680" height="920" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -766,7 +809,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -777,16 +820,16 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
@@ -798,20 +841,17 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Server/Core/App.py</url>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Server/Core/Course.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/test_simulator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -828,16 +868,18 @@
           <caret line="17" column="35" lean-forward="true" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1495776088000" expanded="true" signature="91:1242" ph="..." />
-            <marker date="1495776088000" expanded="true" signature="1299:1403" ph="INSERT INTO gpsSources... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1414" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1433" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1456" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1484" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1485" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1512" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1613" ph="INSERT INTO gpsSources... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1618" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="103:1254" ph="..." />
+            <marker date="1496146165000" expanded="true" signature="1324:1428" ph="INSERT INTO gpsSources... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1439" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1458" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1481" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1509" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1510" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1537" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1638" ph="INSERT INTO gpsSources... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1643" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="2009:2040" ph="DELETE FROM " />
+            <marker date="1496146165000" expanded="true" signature="2020:2040" ph="INSERT INTO stage1.gpsLocations... " />
           </folding>
         </state>
       </provider>
@@ -916,6 +958,15 @@
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+            <marker date="1496145933000" expanded="true" signature="513:538" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="524:538" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="615:641" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="1497:1536" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1537" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1565" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1589:1695" ph="INSERT INTO stage1.course2... " />
+            <marker date="1496145933000" expanded="true" signature="1788:1855" ph="SELECT secto... course2or" />
+            <marker date="1496145933000" expanded="true" signature="2903:3017" ph="SELECT ST_As... course2" />
           </folding>
         </state>
       </provider>
@@ -980,6 +1031,15 @@
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+            <marker date="1496145933000" expanded="true" signature="513:538" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="524:538" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="615:641" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="1497:1536" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1537" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1565" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1589:1695" ph="INSERT INTO stage1.course2... " />
+            <marker date="1496145933000" expanded="true" signature="1788:1855" ph="SELECT secto... course2or" />
+            <marker date="1496145933000" expanded="true" signature="2903:3017" ph="SELECT ST_As... course2" />
           </folding>
         </state>
       </provider>
@@ -1046,13 +1106,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/globals.py" />
     <entry file="file://$PROJECT_DIR$/Server/main.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1077,13 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/WebUI/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Testing/Untitled map.kml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
@@ -1105,16 +1151,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/WebUI/WebServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="73" column="23" lean-forward="false" selection-start-line="73" selection-start-column="23" selection-end-line="73" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1130,60 +1166,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Deploy/db_tables">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="127" lean-forward="false" selection-start-line="2" selection-start-column="127" selection-end-line="2" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/AbstractObject.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Core/Course.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="48" lean-forward="false" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Core/App.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <marker date="1495776088000" expanded="true" signature="91:1242" ph="..." />
-            <marker date="1495776088000" expanded="true" signature="1299:1403" ph="INSERT INTO gpsSources... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1414" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1433" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1456" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1484" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1485" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1512" ph="INSERT INTO gpsLocations... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1613" ph="INSERT INTO gpsSources... " />
-            <marker date="1495776088000" expanded="true" signature="1299:1618" ph="INSERT INTO gpsLocations... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/test_simulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/IODevice/SimulatorObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="26" />
+        <state relative-caret-position="240">
+          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1192,18 +1186,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/IODevice/AbstractObject.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        <state relative-caret-position="345">
+          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Deploy/db_tables">
+    <entry file="file://$PROJECT_DIR$/Server/WebUI/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="127" lean-forward="false" selection-start-line="2" selection-start-column="127" selection-end-line="2" selection-end-column="127" />
+        <state relative-caret-position="345">
+          <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="61" lean-forward="false" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1496027604000" expanded="true" signature="849:1021" ph="SELECT p.mac... MAX" />
+            <marker date="1496027604000" expanded="true" signature="913:976" ph="SELECT MAX(i... gpsLocations" />
+            <marker date="1496027604000" expanded="true" signature="1725:2028" ph="INSERT INTO gpsLocations... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Core/Event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -1218,25 +1241,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/Core/Event.py">
+    <entry file="file://$PROJECT_DIR$/Server/WebUI/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        <state relative-caret-position="1140">
+          <caret line="329" column="55" lean-forward="false" selection-start-line="329" selection-start-column="55" selection-end-line="329" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/test_simulator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/ScoringEngine/GapTimeEngine.py">
+    <entry file="file://$PROJECT_DIR$/Server/Core/Course.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
+        <state relative-caret-position="320">
+          <caret line="103" column="8" lean-forward="true" selection-start-line="103" selection-start-column="8" selection-end-line="105" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <marker date="1496145933000" expanded="true" signature="513:538" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="524:538" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="615:641" ph="DELETE FROM " />
+            <marker date="1496145933000" expanded="true" signature="1497:1536" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1537" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1497:1565" ph="INSERT INTO stage1.course... " />
+            <marker date="1496145933000" expanded="true" signature="1589:1695" ph="INSERT INTO stage1.course2... " />
+            <marker date="1496145933000" expanded="true" signature="1788:1855" ph="SELECT secto... course2or" />
+            <marker date="1496145933000" expanded="true" signature="2903:3017" ph="SELECT ST_As... course2" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/Core/App.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1495778382000" expanded="true" signature="833:1005" ph="SELECT p.mac... MAX" />
-            <marker date="1495778382000" expanded="true" signature="897:960" ph="SELECT MAX(i... gpsLocations" />
-            <marker date="1495778382000" expanded="true" signature="1709:2012" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="103:1254" ph="..." />
+            <marker date="1496146165000" expanded="true" signature="1324:1428" ph="INSERT INTO gpsSources... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1439" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1458" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1481" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1509" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1510" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1537" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1638" ph="INSERT INTO gpsSources... " />
+            <marker date="1496146165000" expanded="true" signature="1324:1643" ph="INSERT INTO gpsLocations... " />
+            <marker date="1496146165000" expanded="true" signature="2009:2040" ph="DELETE FROM " />
+            <marker date="1496146165000" expanded="true" signature="2020:2040" ph="INSERT INTO stage1.gpsLocations... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/IODevice/SimulatorObject.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="143" column="35" lean-forward="false" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/WebUI/WebServer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,5 +1,7 @@
 var map;
 var markers = [];
+var markerRows = [];
+var markerColors = ["green", "red", "black"];
 
 var timer_divRunningTime = setInterval(myTimer, 100);
 
@@ -315,18 +317,54 @@ function plotDevices( list ){
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 8,
-                    strokeColor: "green"
+                    strokeColor: markerColors[0]
                 }
             });
+
+
+
+            var table = gei("tabDevices");
+            var tr = ce("tr");
+
+            var td = ce("td");
+            td.style.backgroundColor = markerColors[0];
+            tr.appendChild( td );
+
+            var td = ce("td");
+            td.innerHTML = m.name;
+            tr.appendChild( td );
+
+            table.appendChild( tr );
+
+            marker.tr = tr;
             markers[ m.name ] = marker;
             markers[ m.name ].data = m;
+
+            markerColors = markerColors.slice(1);
+
         }
 
     }
     window.setTimeout( function(){
         $.getJSON("/api/locations/get", data="", plotDevices );
-    }, 0.05);
+    }, 0.5);
 }
+
+function gei(id){
+    return document.getElementById(id);
+}
+
+function ce(e){
+    return document.createElement(e);
+}
+
+function ac(p, c){
+    return p.appendChild(c);
+}
+
+
+
+
 
 /**
  * Created by jameslenehan on 22.05.17.
