@@ -347,7 +347,7 @@ function plotDevices( list ){
     }
     window.setTimeout( function(){
         $.getJSON("/api/locations/get", data="", plotDevices );
-    }, 0.5);
+    }, 100);
 }
 
 function gei(id){

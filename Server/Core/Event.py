@@ -1,4 +1,4 @@
-from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 from Course import *
 
 class Contest(QObject):
@@ -8,14 +8,17 @@ class Contest(QObject):
         self.courseFileLocation = '';   # save location of course KML
         self.course = '';               # KML object with course
         self.leader = '';
+        self.db = '';
 
+    def setDatabase(self, db):
+        self.db = db;
 
     def setLocation(self, location):
         self.location = tuple(location);
 
     def setCourse(self, courseFileLocation):
         self.courseFileLocation = courseFileLocation;
-        self.course = Course(courseFileLocation);
+        self.course = Course(courseFileLocation, self.db);
 
     def getSaveData(self):
         saveData["location"] = self.location;

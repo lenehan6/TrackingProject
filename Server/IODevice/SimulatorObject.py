@@ -1,5 +1,5 @@
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
+from PyQt5.QtCore import *
+from PyQt5.QtSql import *
 
 from AbstractObject import IODevice_AbstractObject, Type
 from Server.Core.Location import Location
@@ -8,11 +8,12 @@ import time
 import numpy
 
 
-DEFAULT_INTERVAL = 0.5;  #seconds
+DEFAULT_INTERVAL = 500;  #milliseconds
 EARTHS_RADIUS = 6378137;
 
 
 class IODevice_SimulatorObject( IODevice_AbstractObject ):
+    simulatorOutput = pyqtSignal('PyQt_PyObject');
     def __init__(self, id, contest, parent=None):
         super( IODevice_SimulatorObject, self ).__init__(contest, Type.Simulator, parent);
         self.avgSpeed = 40/3.6;              #Average speed of source
@@ -40,16 +41,25 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
         self.timeOfLastCalc = time.time();
 
-        self.db = QSqlDatabase.addDatabase("QPSQL", "SIM"+str(id)+"_" + str(time.time()));
-        self.db.setHostName("localhost");
-        self.db.setPort(5432);
-        self.db.setDatabaseName("events");
+        self.workerThread = "";
 
+        self.timer = QTimer( None );
+        self.timer.setSingleShot( True );
+        self.timer.setInterval( DEFAULT_INTERVAL );
+        self.timer.timeout.connect( self.calculatePosition2 );
 
 
     def __del__(self):
+        self.workerThread.quit();
         super(IODevice_SimulatorObject, self).__del__();
 
+    def setThread(self, t):
+        qDebug( "Thread set to " + str( t ) );
+        self.workerThread = t;
+        t.start();
+
+        self.moveToThread( t );
+        self.timer.moveToThread( t );
 
 
     def setSource(self, source):
@@ -75,79 +85,19 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
         saveData["loopAtEndOfFile"] = self.loopAtEndOfFile;
         return saveData;
 
-    def timerEvent(self, event):
-        if ( ~self.calculatePosition2() ):
-            self.killTimer( event.timerId() );
-
-
-    def calculatePosition(self):
-        if ( self._quit ):
-            return;
-
-        now = time.time();
-        interval = now - self.timeOfLastCalc;
-        self.timeOfLastCalc = now;
-
-        self.lastPos = self.thisPos;
-
-        dLong = self.wp_next.longitude - self.wp_last.longitude;
-        dLat = self.wp_next.latitude - self.wp_last.latitude;
-        dAlt = self.wp_next.altitude - self.wp_last.altitude;
-        absD = (dLong ** 2 + dLat ** 2 + dAlt ** 2) ** (0.5);
-
-        if (self.counter == 0):
-            self.thisPos = self.wp_last;
-        else:
-            self.thisPos = Location();
-            self.thisPos.setAddress(self.addr);
-            self.thisPos.setTime(time.time() * 1000 + self.avgLag);
-            theta = numpy.arctan2(dLong, dLat);
-            phi = numpy.arctan2(dAlt, ((dLong ** 2 + dLat ** 2) ** (0.5)));
-            self.thisPos.setVelocity(self.avgSpeed, theta, phi);
-
-            # move "avgSpeed" from last wp to next
-            long = self.lastPos.longitude + (dLong / absD) * (
-            self.avgSpeed / (EARTHS_RADIUS * numpy.cos(numpy.pi * self.lastPos.longitude / 180))) * interval * 180 / numpy.pi
-            lat = self.lastPos.latitude + (dLat / absD) * (self.avgSpeed / EARTHS_RADIUS) * interval * 180 / numpy.pi
-            alt = self.lastPos.altitude + (dAlt / absD) * (self.avgSpeed / EARTHS_RADIUS) * interval * 180 / numpy.pi
-            self.thisPos.setPosition(long, lat, alt);
-
-            if (long > self.wp_next.longitude * (cmp(dLong, 0)) and
-                        lat > self.wp_next.latitude * (cmp(dLat, 0))
-                ):
-                # if this coordinate has move passed the waypoint
-                if (len(self.coords) == 0):
-                    if self.loopAtEndOfFile:
-                        # reload coords
-                        self.coords = list(self.contest.course.coords);
-                    else:
-                        print "not looping to end of file, delete simulator at next chance"
-                        self._quit = True;
-                        self.deleteLater();
-                        return;
-
-                self.wp_last = self.wp_next;
-                self.wp_next = self.coords.pop(0);
-                # end if
-
-                # track error from current line
-
-        # end if
-        self.counter += 1;
-
-        self.lastPosition = self.thisPos;
-        self.emit(SIGNAL("simulatorOutput(PyQt_PyObject)"), self.thisPos);
-        if (self.counter == 1):
-            print self.addr, "first position calculated";
-
+    @pyqtSlot(result=bool)
     def calculatePosition2(self):
-        print "calculatePosition2()"
+        qDebug( self.addr + " calculatePosition2()" );
 
         if ( self._quit ):
+            qDebug( self.addr + " calculatePosition2() returned, self._quit == True")
             return False;
 
         now = time.time();
         interval = now - self.timeOfLastCalc;
+        if ( interval > DEFAULT_INTERVAL*2/1000 ):
+            qWarning( self.addr + " calculation interval ( " + str(int(interval*1000)) + "ms ) is very large" );
+
         self.timeOfLastCalc = now;
 
         self.lastPos = self.thisPos;
@@ -156,7 +106,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
         percentageComplete = self.distance/self.contest.course.length;
         if ( percentageComplete > 1 ):
-            self.killTimer();
+            qDebug(self.addr + " calculatePosition2() returned, course complete")
             return False;
 
         self.thisPos = self.contest.course.pointAlongCourse( self.db, percentageComplete );
@@ -164,25 +114,39 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
         self.counter += 1;
 
         self.lastPosition = self.thisPos;
-        self.emit(SIGNAL("simulatorOutput(PyQt_PyObject)"), self.thisPos);
+        self.simulatorOutput.emit( self.thisPos );
+        #self.emit(SIGNAL("simulatorOutput(PyQt_PyObject)"), self.thisPos);
         if (self.counter == 1):
-            print self.addr, "first position calculated";
+            qDebug( self.addr + "first position calculated" );
 
-        return True;
+        ticks = time.time() - now;
+        if ( (ticks > DEFAULT_INTERVAL*2/1000) or (interval > DEFAULT_INTERVAL*2/1000) ):
+            raise LookupError( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" )
+            qWarning( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
+        else:
+            qDebug( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
+
+        #run timer every DEFAULT INTERVAL, or immediately if interval is greater than DEFAULT_INTERVAL
+        #qDebug( self.addr + " interval == " + str(interval) + ", timer reloaded with " + str( int( min( max(2*DEFAULT_INTERVAL - (interval*1000), 100),  DEFAULT_INTERVAL ) ) ) + "ms");
+        self.timer.start( min( max(2*DEFAULT_INTERVAL - (interval*1000), 1),  DEFAULT_INTERVAL ) );
+        self.timer.start();
+
+        qDebug(self.addr + "calculatePosition2() end of calc#" + str(self.counter) );
+        return False;
 
 
     def start(self):
         if ( self.delay > 0 ):
-            print self.addr, "waiting ", self.delay, "ms to start"
+            qDebug( self.addr + "waiting " + str(self.delay) + "ms to start" );
 
-        QTimer.singleShot( self.delay, self, SLOT("run()") );
+        QTimer.singleShot( self.delay, self.run );
 
     @pyqtSlot()
     def run(self):
-        print "Simulator Running";
-        self.db.open();
+        qDebug( "Simulator Running" );
 
         self.coords = list(self.contest.course.coords);
+        self.timeOfLastCalc = time.time() - DEFAULT_INTERVAL/1000.0; #fake that last calc was one second ago.
 
         self.wp_last = self.coords.pop(0);
         self.wp_next = self.coords.pop(0);
@@ -195,7 +159,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
         self.thisPos.setTime( time.time()*1000 );
         self.thisPos.setAddress( self.addr );
         self.calculatePosition2();
-        self.startTimer( DEFAULT_INTERVAL*1000 );
+
 
 
 

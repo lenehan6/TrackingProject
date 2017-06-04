@@ -1,31 +1,25 @@
 from Location import Location
 import time
 
-from PyQt4.QtCore import *
-from PyQt4.QtSql import *
+from PyQt5.QtCore import *
+from PyQt5.QtSql import *
 
 import xml.etree.ElementTree as ET
 import re
 
 
 class Course(QObject):
-    def __init__(self, kmlFileLocation):
+    def __init__(self, kmlFileLocation, db):
+        qDebug( "new Course() object (" + kmlFileLocation + ")" );
         QObject.__init__(self, None);
         self.length = 0;
-
-        self.db = QSqlDatabase.addDatabase("QPSQL", "Course_" + str(time.time()));
-        self.db.setHostName("localhost");
-        self.db.setPort(5432);
-        self.db.setDatabaseName("events");
-        self.db.open();
+        self.db = db;
 
         query = "DELETE FROM stage1.course";
-        q = QSqlQuery(self.db);
-        q.exec_(query);
+        q = self.db.do_query( query );
 
         query = "DELETE FROM stage1.course2";
-        q = QSqlQuery(self.db);
-        q.exec_(query);
+        q = self.db.do_query(query);
 
         with open(kmlFileLocation) as f:
             self.file = f.read();
@@ -47,26 +41,28 @@ class Course(QObject):
 
             #query = "INSERT INTO stage1.course (pos) VALUES (" + '), ('.join(values) + ")";
             query = "INSERT INTO stage1.course2 (sector, line) VALUES ( 1, 'LINESTRING(" + ', '.join(values) + ")'::geography )";
-            q = QSqlQuery( self.db );
-            q.exec_( query );
+            q = self.db.do_query(query);
 
+            tick = time.time();
             query = "SELECT sector, ST_Length(line) as line_distance FROM stage1.course2";
-            q = QSqlQuery(self.db);
-            q.exec_(query);
+            q = self.db.do_query(query);
+
             if ( q.lastError().type() == QSqlError.NoError ):
-                print "Sector\t| Distance (km)"
-                print "------------------------------------"
+                output = "Sector distances\rSector\t| Distance (km) \n------------------------------------ \n"
+
                 sum = 0;
                 while q.next():
-                    dist = q.value("line_distance").toFloat()[0];
+                    dist = q.value("line_distance");
                     sum += dist;
-                    print q.value("sector").toInt()[0], "\t\t| ", dist/1000
+                    output += ( str(q.value("sector")) + "\t\t| " + str(dist/1000) ) + "\n";
 
-                print "------------------------------------"
-                print "TOTAL\t| ", sum/1000
+                qDebug( output +
+                        "------------------------------------\n" + \
+                        "TOTAL\t| " + str( sum/1000 ) + "\n" + \
+                        "(Query took " + str( time.time() - tick ) + "s)" )
 
                 self.length = sum;
-        print "Course() initalised";
+        qDebug( "Course() initalised" );
 
 
 
@@ -74,9 +70,10 @@ class Course(QObject):
 
     def pointAlongCourse(self, dbConn, percentage):
 
+        qDebug( "Course.pointAlongCourse()" );
         tick = time.time();
         if ( percentage > 1.0 ):
-            print "percentage (", percentage, ") is greater than 1, returning"
+            qDebug( "percentage (", percentage, ") is greater than 1, returning" )
             return Location();
 
         # if ~(dbConn.isOpen()):
@@ -84,31 +81,24 @@ class Course(QObject):
         #     print "db (", dbConn.connectionName(), ") is not open, attempted to open"
 
 
+
         query = "SELECT ST_AsText(ST_LineInterpolatePoint(line::geometry, " + str(percentage) + ")) as position FROM stage1.course2";
-        #print query;
-        q = QSqlQuery(dbConn);
-        q.exec_(query);
+        q = self.db.do_query( query );
 
         point = Location();
 
         if ( q.lastError().type() == QSqlError.NoError ):
             while q.next():
-                result = q.value("position").toString();
+                result = q.value("position");
                 #print result;
                 r = re.compile('[POINT Z ()]+')
                 #print "regexp returns", r.split( result );
                 coords = r.split( result );
-                point.setPosition( coords[1].toFloat()[0], coords[2].toFloat()[0], coords[3].toFloat()[0]);
+                point.setPosition( coords[1], coords[2], coords[3] );
                 break; #only looking for 1 result
 
         tock = time.time() - tick;
         if ( tock > 0.2 ):
-            print "pointAlongCourse() took ", time.time() - tick, "seconds to return";
+            qWarning( "pointAlongCourse() took ", time.time() - tick, "seconds to return" );
 
         return point;
-
-
-
-    def getClosestPointToCoordinate(self, (long, lat, alt), lastId=-1):
-        # if lastId == -1, search whole file for closest point. Include lastId for faster fix.
-        return (long, lat, alt);

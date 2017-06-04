@@ -2,19 +2,23 @@ import SimpleHTTPServer
 import SocketServer
 import threading
 import json
+import time
 
-from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 
 
 class WebServer(QThread):
     def __init__(self, app, parent=None):
         QThread.__init__(self, parent);
         self.HOST = "localhost"
-        self.PORT = 8084
+        self.PORT = 8086
         self.Handler = '';
         self.httpd = '';
         self._quit = False;
         self.app = app;
+
+    def __del__(self):
+        self._quit = True;
 
     def createServer(self, host, port, handler):
         try:
@@ -36,6 +40,7 @@ class WebServer(QThread):
             finally:
                 break;
 
+        self.quit();
         print "WebServer closed"
 
     def quit(self):
@@ -50,12 +55,17 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         return;
 
     def do_GET(self):
+        #tick = time.time();
+
         if (str(self.path).startswith("/api/")):
             self.apiHandler(self.path);
         else:
             SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
+        #print "'" + self.path + "' took " + str(int((time.time() - tick) * 1E6)) + "us";
+
     def apiHandler(self, path):
+
         path = path.replace("/api/", "");
         p = path.split("/");
 

@@ -1,4 +1,4 @@
-from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 
 from enum import *
 
@@ -10,20 +10,15 @@ class Type(Enum):
 
 class IODevice_AbstractObject(QObject):
     def __init__(self, contest, type=Type.Nil, parent=None):
-        QThread.__init__(self, parent);
+        super( IODevice_AbstractObject, self ).__init__(parent);
         self.updateInterval = -1;
         self.type = type;
         self.contest = contest;
         self.name = ""
         self._quit = False;
         self.addr = "";
-        self.workerThread = QThread();
-        self.workerThread.start();
-        self.moveToThread( self.workerThread );
+        self.db = '';
 
-    def __del__(self):
-        self.workerThread.quit();
-        self.workerThread.wait();
 
     def quit(self):
         self._quit = True;
@@ -38,3 +33,6 @@ class IODevice_AbstractObject(QObject):
 
     def setDeviceName(self, name):
         self.name = name;
+
+    def setDatabase(self, db):
+        self.db = db;
