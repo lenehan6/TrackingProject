@@ -5,8 +5,11 @@
     <title>Tracking Project</title>
     <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjo0zCmULcysDoW6EH_NGxMZ2T2ktUU9E"></script>
     <script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="application/javascript" src="cycleproJS.js"></script>
     <script type="application/javascript" src="index.js"></script>
     <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="style_tablesorter.css"></link>
 
 </head>
 <body onload="initMap()">
@@ -16,51 +19,98 @@
 <table id="tabSideMenu">
     <tr><td id="cellSideMenuTop">
         <div class="boxDiv" id="divRunningTime">00:00:00.0</div>
-            <div class="boxDiv" id="divDevices">
-                <div>Views</div>
+
+        <div class="boxDiv" id="divGroups">
+                <div>Groups</div>
                 <div>
-                    <table class="itemList" id="tabDevices">
+                    <button style="margin-right: 6px" id="btnGroupsNew" onclick="New_Group()">
+                        <img width="16px" src="http://findicons.com/files/icons/2015/24x24_free_application/24/add.png" />
+                    </button>
+                </div>
+                <div><form id="frmGroups">
+                    <table class="tablesorter" id="tabGroups">
+                        <thead>
                         <tr>
                             <th width="5%"></th>
                             <th>Name</th>
-                            <th></th>
+                            <th>Gap</th>
+                            <th>Distance</th>
                         </tr>
+                        </thead>
+                        <tbody></tbody>
                     </table>
-                </div>
+                </form></div>
             </div>
+            <div class="boxDiv" id="divDevices">
+                <div>Devices</div>
+                <div>
+                    <button style="margin-right: 6px" id="btnDevicesSave" onclick="Save_Devices()" hidden>
+                        <img width="16px" src="http://findicons.com/files/icons/138/toolbar/128/save.png" />
+                    </button>
+                </div>
+                <div><form id="frmDevices">
+                    <table class="tablesorter" id="tabDevices">
+                        <thead>
+                        <tr>
+                            <th width="5%"></th>
+                            <th width="1px"></th>
+                            <th>Name</th>
+                            <th width="1px">Speed</th>
+                            <th width="1px">Distance</th>
+
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </form></div>
+            </div>
+
+
 
     </td></tr>
     <tr><td id="cellSideMenuBottom">
-            <div class="boxDiv" id="divViews">
-                <div>Views</div>
-                <div>
-                    <table class="itemList">
-                        <tr>
-                            <th>Name</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr id="rowViewCourse">
-                            <td>Course</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr id="rowViewLeader">
-                            <td>Leader</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <!--<div class="boxDiv" id="divViews">-->
+                <!--<div>Views</div>-->
+                <!--<div>-->
+                    <!--<table class="itemList">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>Name</th>-->
+                            <!--<th></th>-->
+                            <!--<th></th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr id="rowViewCourse">-->
+                            <!--<td>Course</td>-->
+                            <!--<td></td>-->
+                            <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--<tr id="rowViewLeader">-->
+                            <!--<td>Leader</td>-->
+                            <!--<td></td>-->
+                            <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="boxDiv" id="divSettings">
-                <div>Settings</div>
+                <div>Menu</div>
                 <div>
                     <table class="itemList">
-                        <tr id="rowSetting_AutoChangeView">
-                            <td>Auto-change views</td>
-                            <td><input type="checkbox" id="chkAutoChangeView"/></td>
+                        <tr onclick="popup('settings.html', 'Settings')" style="cursor: hand">
+                            <td width="1px" style="text-align: right">
+                                <img class="hoverClick" width="12px" src="http://findicons.com/files/icons/1673/diagram_part_2/96/diagram_v2_13.png"/>
+                            </td>
+                            <td>Settings</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">
+                                <img class="hoverClick" width="12px" src="http://findicons.com/files/icons/2015/24x24_free_application/24/new_document.png"/>
+                            </td>
+                            <td>New Event</td>
                         </tr>
                     </table>
                 </div>

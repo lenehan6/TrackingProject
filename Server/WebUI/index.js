@@ -3,13 +3,15 @@ var markers = [];
 var markerRows = [];
 var markerColors = ["green", "red", "black"];
 
+var Settings;
+GetSettings("GroupNames", function( data ){ Settings = data; });
+
 var timer_divRunningTime = setInterval(myTimer, 100);
 
 function myTimer() {
     var d = new Date();
     document.getElementById("divRunningTime").innerHTML = d.toLocaleTimeString();
 }
-
 
 function initMap() {
 
@@ -299,19 +301,22 @@ function initMap() {
         map: map
     });
 
-    $.getJSON("/api/locations/get", data="", plotDevices );
+    //$.getJSON("/api/locations/get", data="", plotDevices );
+
+    $.getJSON("/api/summary/get", data="", plotDevices2 );
+
 
 }
 
 function plotDevices( list ){
     for (var i = 0; i < list.length; i++){
         m = list[i];
+        var marker;
         //console.log( m, markers );
-        if ( markers[m.name] ){
-            markers[m.name].setPosition({lat: m.details.lat, lng: m.details.lng});
-            markers[m.name].data = m;
+        if ( markers[m.id] ){
+            marker = markers[m.id];
         } else {
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 position: {lat: m.details.lat, lng: m.details.lng},
                 map: map,
                 icon: {
@@ -321,8 +326,6 @@ function plotDevices( list ){
                 }
             });
 
-
-
             var table = gei("tabDevices");
             var tr = ce("tr");
 
@@ -330,38 +333,183 @@ function plotDevices( list ){
             td.style.backgroundColor = markerColors[0];
             tr.appendChild( td );
 
+            //chk
             var td = ce("td");
-            td.innerHTML = m.name;
+            var chk = ce("input");
+            chk.type = "checkbox";
+            chk.deviceId = m.id;
+            chk.checked = m.isEnabled;
+            chk.id = "device" + m.id + "_isEnabled";
+            td.appendChild(chk);
             tr.appendChild( td );
+            marker.isEnabled = chk;
+            chk.onclick = function()
+            {
+                gei("btnDevicesSave").hidden = false;
+            }
+
+
+            //name
+            var td = ce("td");
+
+            var btn = ce("button");
+            btn.type = "button";
+            btn.innerHTML = "<img width='10px' src='http://findicons.com/files/icons/99/office/128/edit.png'/>";
+            btn.style.marginRight = "6px";
+            btn.td = td;
+            btn.tr = tr;
+            btn.hidden = true;
+            td.appendChild( btn );
+            tr.btn = btn;
+            btn.onclick = function(){
+                this.tr.edit();
+            }
+            tr.onmouseover = function(){
+                if ( !this.isEditing )
+                    this.btn.hidden = false;
+            }
+            tr.onmouseout = function(){
+                if ( !this.isEditing )
+                    this.btn.hidden = true;
+            }
+
+            var p = ce("div");
+            p.style.display = "inline";
+            p.id = "device" + m.id + "_name";
+            p.innerHTML = m.name;
+            td.appendChild( p );
+
+            tr.p = p;
+            tr.isEditing = false;
+
+            var input = ce("input");
+            input.type = "text";
+            input.hidden = true;
+            input.value = m.name;
+            td.appendChild( input );
+
+            tr.input = input;
+
+            tr.appendChild( td );
+            marker.name = td;
+
+
+            tr.edit = function(){
+                this.isEditing      = true;
+                this.p.style.display = "none";
+                this.btn.hidden     = true;
+                this.input.hidden   = false;
+                this.input.value    = this.name;
+
+                gei("btnDevicesSave").hidden = false;
+
+            }
+
+            tr.save = function(){
+                this.isEditing      = false;
+                this.btn.hidden     = false;
+                this.p.style.display = "inline";
+                this.input.hidden   = true;
+                this.p.innerHTML    = this.input.value;
+                this.name           = this.input.value;
+
+                gei("btnDevicesSave").hidden = true;
+            }
+
+
+
+            //label
+            var td = ce("td");
+            td.id = "device" + m.id + "_speed";
+            var div = ce("div");
+            div.innerHTML = m.speed;
+            marker.speed = div;
+            td.appendChild( div );
+            tr.appendChild( td );
+            marker.label = td;
+
+            //distance
+            var td = ce("td");
+            td.id = "device" + m.id + "_distance";
+            td.innerHTML = m.distance;
+            tr.appendChild( td );
+            marker.distance = td;
 
             table.appendChild( tr );
 
+            marker.getSaveData = function()
+            {
+                var s = {};
+                s.id        = this.deviceId;
+                s.isEnabled = this.isEnabled.checked;
+                s.name      = this.name;
+                return s;
+            }
+
             marker.tr = tr;
-            markers[ m.name ] = marker;
-            markers[ m.name ].data = m;
+            markers[ m.id ] = marker;
+            markers[ m.id ].data = m;
 
             markerColors = markerColors.slice(1);
 
         }
 
+        marker.data = m;
+        marker.setPosition({lat: m.details.lat, lng: m.details.lng});
+        //marker.name.innerHTML = m.name;
+        marker.distance.innerHTML = m.distance.toFixed(1);
+        marker.speed.innerHTML = m.speed.toFixed(1);
+        //marker.label.innerHTML = m.label;
+        //marker.isEnabled.checked = m.isEnabled;
+        marker.deviceId = m.id;
+
     }
+
     window.setTimeout( function(){
         $.getJSON("/api/locations/get", data="", plotDevices );
     }, 100);
+
 }
 
-function gei(id){
-    return document.getElementById(id);
+function plotDevices2( data ){
+    var groups = data.groups;
+
+
+    plotDevices( data.devices );
+
+    window.setTimeout( function(){
+        $.getJSON("/api/summary/get", data="", plotDevices2 );
+    }, 100);
 }
 
-function ce(e){
-    return document.createElement(e);
-}
+function Save_Devices(){
+    gei("btnDevicesSave").enabled = false;
+    var list = [];
+    for ( var m in markers ){
+        var mkr = markers[m];
+        mkr.tr.save();
+        list[ "'" + mkr.deviceId + "'" ] = mkr.getSaveData();
+    };
 
-function ac(p, c){
-    return p.appendChild(c);
-}
+    console.log( list );
 
+    var req = $.ajax({
+        url:            "/api/locations/set",
+        type:           "POST",
+        data:           list,
+        dataType:       "json",
+        success:        function(){
+            gei("btnDevicesSave").enabled = true;
+            gei("btnDevicesSave").hidden = true;
+        },
+        fail:           function()
+        {
+            alert( "/api/locations/set FAILED, try again");
+            gei("btnDevicesSave").enabled = true;
+        }
+    });
+
+}
 
 
 

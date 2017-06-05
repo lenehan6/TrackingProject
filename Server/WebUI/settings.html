@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="application/javascript" src="cycleproJS.js"></script>
+    <script type="application/javascript" src="settings.js"></script>
+    <link rel="stylesheet" href="style.css"></link>
+
+</head>
+<body>
+    <div align="left">
+        <div class="boxDiv420">
+            <div>Course</div>
+            <div class="explain">
+                <ol>
+                    <li>Create a map in Google My Maps</li>
+                    <li>Export as KML</li>
+                    <li>Upload here!</li>
+                </ol>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>File:</td>
+                        <td id="tdCourseStatus"></td>
+                    </tr>
+                    <tr>
+                        <td>Upload:</td>
+                        <td id="tdFileUpload">
+                            <input id="inputCourseUpload" type="file" onchange="validateFile( this, 'kml', gei('btnCourseUpload') )"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button id="btnCourseUpload">Upload</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sectors:</td>
+                        <td>
+                            <table>
+                            <thead>
+                            <tr>
+                                <th width="1px">#</th>
+                                <th>Name</th>
+                                <th>Distance</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                                <tbody id="tabCourseSectors"></tbody>
+                                <tr>
+                                    <td></td>
+                                    <td>TOTAL</td>
+                                    <td id="tdCourseLength"></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+        <div class="boxDiv420">
+            <div>Participants</div>
+            <div>
+                <table>
+                    <tr>
+                        <td>File:</td>
+                        <td id="tdParticipantsStatus"></td>
+                    </tr>
+                    <tr>
+                        <td>Upload:</td>
+                        <td id="tdFileUpload">
+                            <input id="inputParticipantsUpload" type="file"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button>Upload</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Preview:</td>
+                        <td>
+                            <a href="/api/participants/get"><img src="http://findicons.com/files/icons/1915/xml_docs/128/xml.png" width="16px"/></a>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

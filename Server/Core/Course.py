@@ -43,6 +43,7 @@ class Course(QObject):
             query = "INSERT INTO stage1.course2 (sector, line) VALUES ( 1, 'LINESTRING(" + ', '.join(values) + ")'::geography )";
             q = self.db.do_query(query);
 
+
             tick = time.time();
             query = "SELECT sector, ST_Length(line) as line_distance FROM stage1.course2";
             q = self.db.do_query(query);
@@ -62,6 +63,7 @@ class Course(QObject):
                         "(Query took " + str( time.time() - tick ) + "s)" )
 
                 self.length = sum;
+
         qDebug( "Course() initalised" );
 
 
@@ -70,7 +72,7 @@ class Course(QObject):
 
     def pointAlongCourse(self, dbConn, percentage):
 
-        qDebug( "Course.pointAlongCourse()" );
+        # qDebug( "Course.pointAlongCourse()" );
         tick = time.time();
         if ( percentage > 1.0 ):
             qDebug( "percentage (", percentage, ") is greater than 1, returning" )

@@ -13,6 +13,7 @@ class Location:
         self.direction = 0;
         self.time = 0;                                  #time recorded by device
         self.serverTime = int( time.time() * 1000)     #time recorded when time was recieved by server
+        self.distance = 0;
         #times recorded in Epoch integer milliseconds
 
     def __str__(self):
@@ -37,8 +38,11 @@ class Location:
         _dict["vPhi"] = float( self.vPhi );
         _dict["time_d"] = int( self.time );
         _dict["time_s"] = int( self.serverTime );
+        _dict["distance"] = float( self.distance );
         return _dict;
 
+    def setDistance(self, x):
+        self.distance = float(x);
 
     def setPosition(self, long, lat, alt):
         self.longitude = float(long);

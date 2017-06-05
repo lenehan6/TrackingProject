@@ -14,6 +14,7 @@ class App( QObject ):
         self.webServer = '';
         self.scoringEngine = '';
         self.devices = [];
+        self.groups = [];
         #for writing to db directly
         self.db = "";
 
@@ -31,21 +32,25 @@ class App( QObject ):
         device.simulatorOutput.connect( self.writeLocationToDb );
         #self.connect(device, SIGNAL("simulatorOutput(PyQt_PyObject)"), self.writeLocationToDb);
 
+    def addGroup(self, group):
+        self.groups.append( group );
+
     def setWebServer(self, webServer):
         self.webServer = webServer;
 
     def setScoringEngine(self, engine):
         self.scoringEngine = engine;
+        engine.resultReady.connect( self.updateGapTimes );
 
     def setDatabase( self, db ):
         self.db = db;
 
     @pyqtSlot('PyQt_PyObject')
     def writeLocationToDb( self, loc ):
-        qDebug( "App.writeLocationToDb()" );
+        # qDebug( "App.writeLocationToDb()" );
         tick = time.time();
         #print loc.addr, " - Writing location", loc;
-        query = "INSERT INTO stage1.gpsLocations (mac, time, serverTime, latitude, longitude, altitude, speed, direction) VALUES ( '" + loc.addr + "', " + str(loc.time) + ", " + str(loc.serverTime) + ", " + str(loc.latitude) + ", " + str(loc.longitude) + ", " + str(loc.altitude) + ", " + str(loc.velocity) + ", " + str(loc.vTheta) + ")";
+        query = "INSERT INTO stage1.gpsLocations (mac, time, serverTime, latitude, longitude, altitude, speed, direction, distance) VALUES ( '" + loc.addr + "', " + str(loc.time) + ", " + str(loc.serverTime) + ", " + str(loc.latitude) + ", " + str(loc.longitude) + ", " + str(loc.altitude) + ", " + str(loc.velocity) + ", " + str(loc.vTheta) + ", " + str(loc.distance) + ")";
         q = self.db.do_query( query );
         if q.lastError().type() != QSqlError.NoError:
             print "writeLocationToDb() $ query failed, ", q.lastError().text(), q.lastQuery();
@@ -56,6 +61,20 @@ class App( QObject ):
             qWarning( "WARNING! writeLocationToDb() took " + str( int(tock*1000) ) + "ms" );
 
         return;
+
+    @pyqtSlot('PyQt_PyObject')
+    def updateGapTimes(self, gapTimes):
+        qDebug( "updateGapTimes(), gapTimes==" + gapTimes.__repr__() );
+        for d in self.devices:
+            if d.addr in gapTimes:
+                d.setGapTime( gapTimes[ d.addr ] );
+
+    def getDeviceById(self, id):
+        for d in self.devices:
+            if ( d.id == id ):
+                return d;
+
+        return None;
 
     def deleteEventData( self ):
         qDebug( "App.deleteEventData()" );

@@ -7,8 +7,10 @@ import time
 from Core.App import App
 from Core.Event import Contest as Contest
 from Core.Database import Database
+from Core.Group import Group
 from IODevice.SimulatorObject import IODevice_SimulatorObject
 from WebUI.WebServer import WebServer
+from ScoringEngine.GapTimeEngine import ScoringEngine_GapTimeEngine
 
 import webbrowser
 import os, sys
@@ -73,8 +75,8 @@ i += 1;
 
 device2 = IODevice_SimulatorObject( i, contest );
 device2.setDeviceName( "simulator2" );
-device2.setDelay( 5.7 * 1000 );
-device2.setAvgSpeed( 45/3.6 );
+device2.setDelay( 1000 );
+device2.setAvgSpeed( 55/3.6 );
 device2.setDatabase( db );
 t2 = QThread();
 device2.setThread( t2 );
@@ -82,14 +84,45 @@ device2.start();
 app.addDevice( device2 );
 i += 1;
 
+device3 = IODevice_SimulatorObject( i, contest );
+device3.setDeviceName( "simulator3" );
+device3.setDelay( 1000 );
+device3.setAvgSpeed( 45/3.6 );
+device3.setDatabase( db );
+t3 = QThread();
+device3.setThread( t3 );
+device3.start();
+app.addDevice( device3 );
+i += 1;
+
+
+engine = ScoringEngine_GapTimeEngine( contest );
+engine.setDatabase( db );
+app.setScoringEngine( engine );
+engine.start();
+
+app.dbLocationsUpdated.connect( engine.calculateCurrentGap );
+
+group1 = Group( app );
+group1.setName( "Peleton" );
+group1.setDevice( device3 );
+app.addGroup( group1 );
+
+group2 = Group( app );
+group2.setName( "Leader" );
+group2.setDevice( device2 );
+app.addGroup( group2 );
+
 
 os.chdir("WebUI");
 www = WebServer( app );
+www.setDatabase( db );
 www.start();
 
 app.setWebServer( www );
 
 webbrowser.open( "http://" + www.HOST + ":" + str(www.PORT) + "/api/locations/get");
+webbrowser.open( "http://" + www.HOST + ":" + str(www.PORT) + "/api/summary/get");
 webbrowser.open( "http://" + www.HOST + ":" + str(www.PORT) );
 
 ##create eventloop and wait

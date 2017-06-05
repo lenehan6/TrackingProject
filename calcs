@@ -11,3 +11,35 @@ for each participant
 
 
 def ->
+
+
+
+
+SELECT t.id, t.mac, t.time, t.distance, t.speed, t.longitude, t.latitude, t.altitude
+FROM
+(
+    SELECT mac, MAX(distance) AS distance FROM stage1.gpsLocations
+    GROUP BY mac
+) last
+JOIN stage1.gpsLocations t
+ON last.mac=t.mac AND last.distance=t.distance
+ORDER BY t.distance DESC;
+
+
+
+(
+SELECT t.* FROM
+(
+    SELECT mac, MAX(distance) AS distance FROM stage1.gpsLocations
+    WHERE distance<=0.536 GROUP BY mac
+) near
+JOIN stage1.gpsLocations t ON t.distance=near.distance
+UNION
+SELECT t.* FROM
+(
+    SELECT mac, MIN(distance) AS distance FROM stage1.gpsLocations
+    WHERE distance>0.536 GROUP BY mac
+) near
+JOIN stage1.gpsLocations t ON t.distance=near.distance
+)
+ORDER BY mac, distance;

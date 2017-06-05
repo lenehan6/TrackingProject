@@ -27,7 +27,6 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
         ##for calculations
         self.counter = 0;
-        self.distance = 0;
         self.course = 0;
         self.coords = list();
         self.wp_last = Location();
@@ -87,7 +86,7 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
     @pyqtSlot(result=bool)
     def calculatePosition2(self):
-        qDebug( self.addr + " calculatePosition2()" );
+        #qDebug( self.addr + " calculatePosition2()" );
 
         if ( self._quit ):
             qDebug( self.addr + " calculatePosition2() returned, self._quit == True")
@@ -104,12 +103,21 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
 
         self.distance += interval*self.avgSpeed;
 
-        percentageComplete = self.distance/self.contest.course.length;
-        if ( percentageComplete > 1 ):
+        percentageComplete = (self.distance/self.contest.course.length);
+
+        if ( self.loopAtEndOfFile and percentageComplete > 1 ):
+            percentageComplete -= numpy.floor(percentageComplete);
+        elif ( percentageComplete > 1 ):
             qDebug(self.addr + " calculatePosition2() returned, course complete")
             return False;
 
         self.thisPos = self.contest.course.pointAlongCourse( self.db, percentageComplete );
+        self.thisPos.setVelocity( self.avgSpeed, numpy.arctan2( self.thisPos.latitude, self.thisPos.longitude ), 0 );
+        self.thisPos.setDistance( int(self.distance) / 1000.0 );
+        self.thisPos.setAddress( self.addr );
+        self.thisPos.setTime( now*1000 );
+
+        self.speed = self.avgSpeed;
 
         self.counter += 1;
 
@@ -120,18 +128,18 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
             qDebug( self.addr + "first position calculated" );
 
         ticks = time.time() - now;
-        if ( (ticks > DEFAULT_INTERVAL*2/1000) or (interval > DEFAULT_INTERVAL*2/1000) ):
-            raise LookupError( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" )
-            qWarning( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
-        else:
-            qDebug( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
+        # if ( (ticks > DEFAULT_INTERVAL*2/1000) or (interval > DEFAULT_INTERVAL*2/1000) ):
+        #     raise LookupError( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" )
+        #     qWarning( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
+        # else:
+        #     qDebug( self.addr + " calculatePosition2() took " + str( int(ticks*1000) ) + "ms to calculate" );
 
         #run timer every DEFAULT INTERVAL, or immediately if interval is greater than DEFAULT_INTERVAL
         #qDebug( self.addr + " interval == " + str(interval) + ", timer reloaded with " + str( int( min( max(2*DEFAULT_INTERVAL - (interval*1000), 100),  DEFAULT_INTERVAL ) ) ) + "ms");
         self.timer.start( min( max(2*DEFAULT_INTERVAL - (interval*1000), 1),  DEFAULT_INTERVAL ) );
         self.timer.start();
 
-        qDebug(self.addr + "calculatePosition2() end of calc#" + str(self.counter) );
+        #qDebug(self.addr + "calculatePosition2() end of calc#" + str(self.counter) );
         return False;
 
 
