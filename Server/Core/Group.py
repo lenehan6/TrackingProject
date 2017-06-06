@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtSql import *
 import Database
 import json
+import numpy
 
 class Group( QObject ):
     _id = 0;
@@ -17,7 +18,7 @@ class Group( QObject ):
         self.bibs = list();
         self.deviceId = -1;
 
-        self.device = '';
+        self.device = "";
         self.conn_gapTime = None;
         Group._id += 1;
         self.save();
@@ -29,6 +30,7 @@ class Group( QObject ):
         d["gap"]    = self.gap;
         d["bibs"]   = self.bibs;
         d["deviceId"] = self.deviceId;
+        d["distance"] = 0 if self.device=="" else numpy.round(self.device.distance / 1000, 3);
         return d;
 
     def save(self):
@@ -49,7 +51,7 @@ class Group( QObject ):
 
     @pyqtSlot(float)
     def updateGapTime(self, gap):
-        qDebug( "updateGapTime(), gap==" + str(gap) );
+        #qDebug( "updateGapTime(), gap==" + str(gap) );
         self.gap = gap;
         self.gapTimeChanged.emit( gap );
 

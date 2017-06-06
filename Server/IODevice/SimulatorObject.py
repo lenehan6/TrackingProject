@@ -52,6 +52,19 @@ class IODevice_SimulatorObject( IODevice_AbstractObject ):
         self.workerThread.quit();
         super(IODevice_SimulatorObject, self).__del__();
 
+
+    def __dict__(self):
+        _device = dict();
+        _device["id"] = self.id;
+        _device["name"] = self.name;
+        _device["speed"] = numpy.round(self.speed * 3.6, 3);
+        _device["distance"] = numpy.round(self.distance / 1000, 3);
+        _device["isEnabled"] = self.isEnabled;
+        _device["details"] = self.lastPosition.dict();
+        _device["gap"] = self.gap;
+        return _device;
+
+
     def setThread(self, t):
         qDebug( "Thread set to " + str( t ) );
         self.workerThread = t;

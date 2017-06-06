@@ -58,6 +58,6 @@ class IODevice_AbstractObject(QObject):
         self.db = db;
 
     def setGapTime(self, gap):
-        qDebug( "setGapTime(), gap==" + str(gap) );
+        #qDebug( "setGapTime(), gap==" + str(gap) );
         self.gap = gap;
         self.gapTimeChanged.emit( gap );

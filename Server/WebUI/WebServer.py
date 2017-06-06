@@ -13,7 +13,7 @@ class WebServer(QThread):
     def __init__(self, app, parent=None):
         QThread.__init__(self, parent);
         self.HOST = "localhost"
-        self.PORT = 8093
+        self.PORT = 8090
         self.Handler = '';
         self.httpd = '';
         self._quit = False;
@@ -201,37 +201,22 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
 
-                query = "SELECT * FROM stage1.apiCache WHERE key='gapTime/get'";
-                q = self.db.do_query(query);
-
-                gap = dict();
-                while q.next():
-                    if q.value("key") == "gapTime/get":
-                        qDebug( q.value("value") );
-                        gap = json.loads( q.value("value") );
-
-                _out = [];
-                for d in self.app.devices:
-                    _device = dict();
-                    _device["id"] = d.id;
-                    _device["name"] = d.name;
-                    _device["speed"] = numpy.round( d.speed*3.6, 1 );
-                    _device["distance"] = numpy.round( d.distance / 1000, 1 );
-                    _device["isEnabled"] = d.isEnabled;
-                    _device["details"] = d.lastPosition.dict();
-                    if d.addr in gap:
-                        _device["gap"] = gap[ d.addr ];
-                    else:
-                        _device["gap"] = -1;
-
-                    _out.append( _device );
-
                 output = dict();
-                output["devices"] = _out;
+                devices = [];
+                for d in self.app.devices:
+                    devices.append( d.__dict__() );
+
+                output["devices"] = devices;
 
                 groups = list();
                 for g in self.app.groups:
-                    groups.append( g.__dict__() );
+                    d = g.__dict__();
+                    i = 0;
+                    for _g in groups:
+                        if _g["gap"] > d["gap"]:
+                            break;
+                        i += 1;
+                    groups.insert( i, g.__dict__() );
 
                 output["groups"] = groups;
 

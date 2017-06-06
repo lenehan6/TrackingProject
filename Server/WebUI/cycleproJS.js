@@ -58,4 +58,22 @@ function GetSettings( str, callback )
     $.getJSON("/api/settings/get", data=str, callback)
 }
 
+function timeformat( secs ){
+    var str = "";
+
+    var h = Math.floor(secs / 60 / 60);
+    if ( h > 0 )
+        str += h + "h";
+
+    var m = Math.floor( (secs - (h*60*60))/60 );
+    if ( (h > 0) ||
+        (m > 0) )
+        str += ((m<10 && h>0)?"0":"") + m + '"';
+
+    var s = Math.floor( secs )%60;
+    str += (((m>0 || h>0) & (s<10))?"0":"") + s + "'";
+
+    return str;
+}
+
 

@@ -64,7 +64,7 @@ class App( QObject ):
 
     @pyqtSlot('PyQt_PyObject')
     def updateGapTimes(self, gapTimes):
-        qDebug( "updateGapTimes(), gapTimes==" + gapTimes.__repr__() );
+        #qDebug( "updateGapTimes(), gapTimes==" + gapTimes.__repr__() );
         for d in self.devices:
             if d.addr in gapTimes:
                 d.setGapTime( gapTimes[ d.addr ] );

@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var groups = [];
 var markerRows = [];
 var markerColors = ["green", "red", "black"];
 
@@ -326,11 +327,13 @@ function plotDevices( list ){
                 }
             });
 
+            marker.color = markerColors[0];
+
             var table = gei("tabDevices");
             var tr = ce("tr");
 
             var td = ce("td");
-            td.style.backgroundColor = markerColors[0];
+            td.style.backgroundColor = marker.color;
             tr.appendChild( td );
 
             //chk
@@ -465,17 +468,167 @@ function plotDevices( list ){
 
     }
 
-    window.setTimeout( function(){
-        $.getJSON("/api/locations/get", data="", plotDevices );
-    }, 100);
+    // window.setTimeout( function(){
+    //     $.getJSON("/api/locations/get", data="", plotDevices );
+    // }, 100);
 
 }
 
-function plotDevices2( data ){
-    var groups = data.groups;
 
+function plotGroups( list ){
+
+    var deviceIds = [];
+
+    for (var i = 0; i < list.length; i++){
+        var g = list[i];
+        var group;
+        //console.log( m, markers );
+        if ( groups[g.id] ){
+            group = groups[g.id];
+        } else {
+
+            group = {};
+            var table = gei("tabGroups");
+            var tr = ce("tr");
+
+            var td = ce("td");
+            td.style.backgroundColor = markers[g.deviceId].color;
+            tr.appendChild( td );
+
+
+            //name
+            var td = ce("td");
+
+            var btn = ce("button");
+            btn.type = "button";
+            btn.innerHTML = "<img width='10px' src='http://findicons.com/files/icons/99/office/128/edit.png'/>";
+            btn.style.marginRight = "6px";
+            btn.td = td;
+            btn.tr = tr;
+            btn.hidden = true;
+            td.appendChild( btn );
+            tr.btn = btn;
+            btn.onclick = function(){
+                this.tr.edit();
+            }
+            tr.onmouseover = function(){
+                if ( !this.isEditing )
+                    this.btn.hidden = false;
+            }
+            tr.onmouseout = function(){
+                if ( !this.isEditing )
+                    this.btn.hidden = true;
+            }
+
+            var p = ce("div");
+            p.style.display = "inline";
+            p.id = "group" + g.id + "_name";
+            p.innerHTML = g.name;
+            td.appendChild( p );
+
+            tr.p = p;
+            tr.isEditing = false;
+
+            var input = ce("input");
+            input.type = "text";
+            input.hidden = true;
+            input.value = g.name;
+            td.appendChild( input );
+
+            tr.input = input;
+            tr.name = g.name;
+
+            tr.appendChild( td );
+            group.name = td;
+
+
+            tr.edit = function(){
+                this.isEditing      = true;
+                this.p.style.display = "none";
+                this.btn.hidden     = true;
+                this.input.hidden   = false;
+                this.input.value    = this.name;
+
+                gei("btnGroupsSave").hidden = false;
+
+            }
+
+            tr.save = function(){
+                this.isEditing      = false;
+                this.btn.hidden     = false;
+                this.p.style.display = "inline";
+                this.input.hidden   = true;
+                this.p.innerHTML    = this.input.value;
+                this.name           = this.input.value;
+
+                gei("btnGroupsSave").hidden = true;
+            }
+
+
+
+            // //label
+            // var td = ce("td");
+            // td.id = "device" + m.id + "_speed";
+            // var div = ce("div");
+            // div.innerHTML = m.speed;
+            // marker.speed = div;
+            // td.appendChild( div );
+            // tr.appendChild( td );
+            // marker.label = td;
+
+            //distance or gap
+            var td = ce("td");
+            td.id = "device" + g.id + "_distance";
+            td.style.textAlign = "right";
+            td.innerHTML = (g.gap <= 0)?(g.distance):(g.gap);
+            tr.appendChild( td );
+            group.gap = td;
+
+            table.appendChild( tr );
+
+            group.getSaveData = function()
+            {
+                var s = {};
+                s.id        = this.id;
+                s.name      = this.name;
+                return s;
+            }
+
+            group.tr = tr;
+            groups[ g.id ] = group;
+            groups[ g.id ].data = g;
+
+
+        }
+
+        group.data = g;
+        //marker.name.innerHTML = m.name;
+        group.gap.innerHTML = (g.gap <= 0.1)?("(" + g.distance.toFixed(1) + ")"):( timeformat(g.gap) );
+        //marker.speed.innerHTML = m.speed.toFixed(1);
+        //marker.label.innerHTML = m.label;
+        //marker.isEnabled.checked = m.isEnabled;
+        group.id = g.id;
+
+        deviceIds.push( g.deviceId );
+
+    }
+
+    for ( var m in markers ){
+        var mkr = markers[m];
+
+        if ( deviceIds.indexOf( parseInt( m ) ) == -1 )
+            mkr.icon.strokeOpacity = 0.4;
+        else
+            mkr.icon.strokeOpacity = 1.0;
+    }
+
+}
+
+
+function plotDevices2( data ){
 
     plotDevices( data.devices );
+    plotGroups( data.groups );
 
     window.setTimeout( function(){
         $.getJSON("/api/summary/get", data="", plotDevices2 );
