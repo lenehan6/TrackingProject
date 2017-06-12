@@ -1,0 +1,195 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", sans-serif;
+    font-size: small;
+}
+
+#tabSideMenu {
+    position:           fixed;
+    clear:              both;
+    height:             100%;
+    width:              30%;
+    maxWidth:           420px;
+    top:                0;
+    border:             none;
+    padding-bottom:     42px;
+    background-color:   transparent;
+}
+
+#cellSideMenuTop, #cellSideMenuBottom {
+    color:              #523735;
+    padding:            6px;
+}
+
+#cellSideMenuTop {
+    vertical-align: top;
+}
+
+#cellSideMenuBottom {
+    vertical-align: bottom;
+}
+
+#divRunningTime {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+div.boxDiv, div.boxDiv420 {
+    background-color:   white;
+    border:             solid 1px #DDDDEE;
+    box-shadow:         4px 4px 2px #50545c;
+    margin:             12px;
+    text-align:         left;
+}
+
+div.boxDiv420 {
+    width:              48%;
+    min-width:          420px;
+}
+
+div.boxDiv420:nth-child(even){
+    display:            inline-block;
+    margin-left:        0.5%;
+    float:              right;
+}
+div.boxDiv420:nth-child(odd) {
+    display:            inline-block;
+    margin-right:       0.5%;
+}
+
+
+div.boxDiv > div, div.boxDiv420 > div  {
+    padding:            0;
+}
+
+div.boxDiv > :first-child, div.boxDiv420 > :first-child {
+    background-color:   #F8F8F8;
+    padding:            4px;
+    border:             none;
+    border-bottom:      inherit;
+    font-weight:        bold;
+
+}
+
+div.explain {
+    font-weight:        normal;
+    font-style:         italic;
+    text-align:         left;
+    border-bottom:      inherit;
+    padding:            4px;
+    background-color:   #fafafa;
+}
+
+table {
+    width:              100%;
+}
+
+table th {
+    background-color:   #EDEDED;
+    font-weight:        bold;
+    text-align:         left;
+    padding:            4px;
+}
+
+table.itemList tr:hover {
+    background-color:   yellow;
+}
+
+
+
+
+#footer {
+    position:           fixed;
+    clear:              both;
+    width:              100%;
+    height:             16px;
+    bottom:             0;
+    border:             none;
+    padding:            13px 0 0 0;
+    background-color:   #50545c;
+}
+
+table {
+    padding:            0;
+    border-spacing:     0;
+}
+
+div.boxDiv table td, div.boxDiv420 table td  {
+    padding:            4px;
+    border-spacing:     2px;
+}
+
+.hoverClick:hover {
+    background-color:   #F8F8F8;
+}
+
+div.popupBackground {
+    background-color:   rgba(80, 84, 92, 0.7);
+    position:           absolute;
+    clear:              both;
+    top:                0;
+    left:               0;
+    width:              100%;
+    height:             100%;
+}
+
+div.popupBody {
+    margin-top:         40px;
+    width:              75%;
+    min-width:          640px;
+    background-color:   white;
+    box-shadow:         8px 8px 4px #50545c;
+    padding:            12px;
+}
+
+ol {
+    margin:             0px;
+}
+
+.portal-login-background-image {
+    position:           fixed;
+    clear:              both;
+    height:             100%;
+    width:              100%;
+    top:                0;
+}
+
+.portal-login-dialog {
+    clear:              both;
+    height:             100%;
+    width:              30%;
+    min-width:          420px;
+    background-color:   #153359;
+    vertical-align:     center;
+    padding:            24px;
+    text-align:         right;
+    position:           fixed;
+    top:                0;
+
+}
+
+.portal-login-box {
+    border-radius:      25px;
+    text-align:         left;
+    background-color:   #FFFFFF;
+    width:              50%;
+    min-width:          320px;
+    padding:            24px;
+    position:           absolute;
+    top:                20%;
+    right:              24px;
+}
+
+td > input { width: 100%; }
+
+
+

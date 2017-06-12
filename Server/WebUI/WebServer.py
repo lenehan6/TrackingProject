@@ -1,8 +1,10 @@
-import SimpleHTTPServer
-import SocketServer
-import threading
 import json
 import time
+
+from SimpleHTTPServer import SimpleHTTPRequestHandler
+from BaseHTTPServer import HTTPServer
+from SocketServer import ThreadingMixIn
+import threading
 
 import numpy
 
@@ -13,7 +15,7 @@ class WebServer(QThread):
     def __init__(self, app, parent=None):
         QThread.__init__(self, parent);
         self.HOST = "localhost"
-        self.PORT = 8090
+        self.PORT = 8095
         self.Handler = '';
         self.httpd = '';
         self._quit = False;
@@ -28,7 +30,7 @@ class WebServer(QThread):
 
     def createServer(self, host, port, handler):
         try:
-            server = SocketServer.TCPServer((host, port), handler);
+            server = ThreadedHTTPServer((host, port), handler);
         except:
             server = self.createServer(host, port + 1, handler);
 
@@ -55,8 +57,10 @@ class WebServer(QThread):
         self.httpd.shutdown();
         self.httpd.server_close();
 
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    """Handle requests in a separate thread."""
 
-class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+class Handler(SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         #print "%s - - [%s] %s\n" % (self.address_string(), self.log_date_time_string(), format % args);
         return;
@@ -67,7 +71,9 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if (str(self.path).startswith("/api/")):
             self.apiHandler(self.path);
         else:
-            SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+            SimpleHTTPRequestHandler.do_GET(self)
+
+        #qDebug( threading.currentThread().getName() );
 
         #print "'" + self.path + "' took " + str(int((time.time() - tick) * 1E6)) + "us";
 
@@ -77,7 +83,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if (str(self.path).startswith("/api/")):
             self.apiHandler(self.path);
         else:
-            SimpleHTTPServer.SimpleHTTPRequestHandler.do_POST(self)
+            SimpleHTTPRequestHandler.do_POST(self)
 
         #print "'" + self.path + "' took " + str(int((time.time() - tick) * 1E6)) + "us";
 
@@ -98,7 +104,7 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                         getParams[ x[0] ] = x[1];
 
         if (len(p) == 0):
-            SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+            SimpleHTTPRequestHandler.do_GET(self)
             return;
 
         if (p[0] == "locations"):
