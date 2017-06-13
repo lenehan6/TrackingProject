@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  variables:
+    FOO: "BAR"
+    1: 2
+
+phases:
+  install:
+    commands:
+      - ECHO foo
+  pre_build:
+    commands:
+      - ls
+  build:
+    commands:
+      - ECHO $PATH
+      - python SysAdmin/test_builder.py
+  post_build:
+    commands:
+      - ECHO done

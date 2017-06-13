@@ -18,7 +18,7 @@ REGEX_EVENTLINK = "\/[0-9]{5}(\/$)?(\/.+)?$"
 
 
 
-class WebServer(QThread):
+class WebServer(threading.Thread):
     def __init__(self, app, parent=None):
         QThread.__init__(self, parent);
         self.HOST = "localhost"
@@ -29,6 +29,7 @@ class WebServer(QThread):
         self.app = app;
         self.db = '';
         self.portForEvent = {12345: 8081};
+        self.error = dict();
 
     def __del__(self):
         self._quit = True;
@@ -52,11 +53,14 @@ class WebServer(QThread):
         self.httpd = self.createServer(self.HOST, self.PORT, self.Handler)
         print "serving at port", self.PORT
 
-        while not self._quit:
-            try:
-                self.httpd.serve_forever();
-            finally:
-                break;
+        try:
+            self.httpd.serve_forever();
+        except Exception, e:
+            exception_name, exception_value = sys.exc_info()[:2]
+            self.error["err"] = exception_value;
+            self.error["error"] = exception_name;
+        finally:
+            self.quit();
 
         self.quit();
         print "WebServer closed"
